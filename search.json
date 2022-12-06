@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code."
+  },
+  {
+    "objectID": "posts/python/python-parallel-processing.html",
+    "href": "posts/python/python-parallel-processing.html",
+    "title": "Python Parellel Processing",
+    "section": "",
+    "text": "I came across this function called parallel in fastai, and it seems very interesting.\n\n\n\n\n\n\nA Simple Example\n\nfrom fastcore.all import parallel\n\n\nfrom nbdev.showdoc import doc\n\n\ndoc(parallel)\n\nparallel[source]parallel(f, items, *args, n_workers=8, total=None, progress=None, pause=0, **kwargs)\n\nApplies func in parallel to items, using n_workers\nShow in docs\n\n\nAs the documentation states, the parallel function can run any python function f with items using multiple workers, and collect the results.\nLet’s try a simple examples:\n\nimport math\nimport time\n\ndef f(x):\n  time.sleep(1)\n  return x * 2\n\nnumbers = list(range(10))\n\n\n%%time\n\nlist(map(f, numbers))\nprint()\n\n\nCPU times: user 0 ns, sys: 0 ns, total: 0 ns\nWall time: 10 s\n\n\n\n%%time\n\nlist(parallel(f, numbers))\nprint()\n\n\n\n\n\nCPU times: user 32 ms, sys: 52 ms, total: 84 ms\nWall time: 2.08 s\n\n\nThe function f we have in this example is very simple: it sleeps for one second and then returns x*2. When executed in serial, it takes 10 seconds which is exactly what we expect. When using more workers(8 by default), it takes only 2 seconds.\n\n\nDig into the Implementation\nLet’s see how parallel is implemented:\n\nparallel??\n\n\nSignature:\nparallel(\n    f,\n    items,\n    *args,\n    n_workers=8,\n    total=None,\n    progress=None,\n    pause=0,\n    **kwargs,\n)\nSource:   \ndef parallel(f, items, *args, n_workers=defaults.cpus, total=None, progress=None, pause=0, **kwargs):\n    \"Applies `func` in parallel to `items`, using `n_workers`\"\n    if progress is None: progress = progress_bar is not None\n    with ProcessPoolExecutor(n_workers, pause=pause) as ex:\n        r = ex.map(f,items, *args, **kwargs)\n        if progress:\n            if total is None: total = len(items)\n            r = progress_bar(r, total=total, leave=False)\n        return L(r)\nFile:      /opt/conda/lib/python3.7/site-packages/fastcore/utils.py\nType:      function\n\n\n\n\n\n??ProcessPoolExecutor\n\n\nInit signature:\nProcessPoolExecutor(\n    max_workers=8,\n    on_exc=<built-in function print>,\n    pause=0,\n    mp_context=None,\n    initializer=None,\n    initargs=(),\n)\nSource:        \nclass ProcessPoolExecutor(concurrent.futures.ProcessPoolExecutor):\n    \"Same as Python's ProcessPoolExecutor, except can pass `max_workers==0` for serial execution\"\n    def __init__(self, max_workers=defaults.cpus, on_exc=print, pause=0, **kwargs):\n        if max_workers is None: max_workers=defaults.cpus\n        self.not_parallel = max_workers==0\n        store_attr(self, 'on_exc,pause,max_workers')\n        if self.not_parallel: max_workers=1\n        super().__init__(max_workers, **kwargs)\n    def map(self, f, items, *args, **kwargs):\n        self.lock = Manager().Lock()\n        g = partial(f, *args, **kwargs)\n        if self.not_parallel: return map(g, items)\n        try: return super().map(partial(_call, self.lock, self.pause, self.max_workers, g), items)\n        except Exception as e: self.on_exc(e)\nFile:           /opt/conda/lib/python3.7/site-packages/fastcore/utils.py\nType:           type\nSubclasses:     \n\n\n\n\nAs we can see in the source code, under the hood, this is using the concurrent.futures.ProcessPoolExecutor class from Python.\nNote that this class is essentially different than Python Threads, which is subject to the Global Interpreter Lock.\nThe ProcessPoolExecutor class is an Executor subclass that uses a pool of processes to execute calls asynchronously. ProcessPoolExecutor uses the multiprocessing module, which allows it to side-step the Global Interpreter Lock but also means that only picklable objects can be executed and returned.\n\n\nUse cases\nThis function can be quite useful for long running tasks and you want to take advantage of multi-core CPUs to speed up your processing. For example, if you want to download a lot of images from the internet, you may want to use this to parallize your download jobs.\nIf your function f is very fast, there can be suprising cases, here is an example:\n\nimport math\nimport time\n\ndef f(x):\n  return x * 2\n\nnumbers = list(range(10000))\n\n\n%%time\n\nlist(map(f, numbers))\nprint()\n\n\nCPU times: user 0 ns, sys: 0 ns, total: 0 ns\nWall time: 1.24 ms\n\n\n\n%%time\n\nlist(parallel(f, numbers))\nprint()\n\n\n\n\n\nCPU times: user 3.96 s, sys: 940 ms, total: 4.9 s\nWall time: 12.4 s\n\n\nIn the above example, f is very fast and the overhead of creating a lot of tasks outweigh the advantage of multi-processing. So use this with caution, and always take profiles."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Chi’s Blog",
+    "section": "",
+    "text": "Post With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nDec 6, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nDec 3, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\n  \n\n\n\n\nPython Parellel Processing\n\n\n\n\n\n\n\nPython\n\n\n\n\n\n\n\n\n\n\n\nAug 30, 2020\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Chi is currently at Google, before which he has worked for Xiaomi, Amazon and PDD as a software engineer. His experiences include data and machine learning, especially in Ads and NLP."
+  }
+]
