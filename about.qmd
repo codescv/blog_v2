@@ -1,0 +1,20 @@
+---
+title: "About"
+image: profile.png
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/codescv
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/chizhangzju
+    - icon: github
+      text: Github
+      href: https://github.com/codescv
+
+---
+
+Chi is currently at Google, before which he has worked for Xiaomi, Amazon and PDD as a software engineer. His experiences include data and machine learning, especially in Ads and NLP.
+
