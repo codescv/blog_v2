@@ -2,8 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/post-with-code/index.html",
-      "/posts/welcome/index.html",
+      "/posts/sd/stable-diffusion-1.html",
       "/posts/python/python-parallel-processing.html"
     ]
   }
