@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://codescv.github.io/blog_v2/posts/sd/stable-diffusion-2.html</loc>
+    <lastmod>2022-12-11T02:49:49.083Z</lastmod>
+  </url>
+  <url>
     <loc>https://codescv.github.io/blog_v2/posts/sd/stable-diffusion-1.html</loc>
-    <lastmod>2022-12-07T10:23:24.089Z</lastmod>
+    <lastmod>2022-12-11T02:49:49.788Z</lastmod>
   </url>
   <url>
     <loc>https://codescv.github.io/blog_v2/posts/python/python-parallel-processing.html</loc>
-    <lastmod>2022-12-07T10:23:26.393Z</lastmod>
+    <lastmod>2022-12-11T02:49:51.919Z</lastmod>
   </url>
   <url>
     <loc>https://codescv.github.io/blog_v2/index.html</loc>
-    <lastmod>2022-12-07T10:23:27.050Z</lastmod>
+    <lastmod>2022-12-11T02:49:52.541Z</lastmod>
   </url>
   <url>
     <loc>https://codescv.github.io/blog_v2/about.html</loc>
-    <lastmod>2022-12-07T10:23:27.357Z</lastmod>
+    <lastmod>2022-12-11T02:49:52.842Z</lastmod>
   </url>
 </urlset>
