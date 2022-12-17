@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/sd/stable-diffusion-3.html",
       "/posts/sd/stable-diffusion-2.html",
       "/posts/sd/stable-diffusion-1.html",
       "/posts/python/python-parallel-processing.html"
