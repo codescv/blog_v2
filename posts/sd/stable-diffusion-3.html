@@ -292,7 +292,13 @@ gtag('config', 'G-NRFV6QTHB6', { 'anonymize_ip': true});
 }</code></pre>
 </div>
 </div>
-<p>There are 5 main components of a <code>StableDiffusionPipeline</code>: - <code>VAE</code> This is a downsampler + upsampler combination which works in the beginning and the end of the pipeline. It can “compress” the image from 512x512 -&gt; 64x64 (8 times, which means the image sizes need to be divisible by 8) or “decompress” it back. - <code>Text Encoder</code> and <code>Tokenizer</code> This two components work together to convert text prompts into embeddings. - <code>UNet</code> This is the main module for diffusion, which takes a nosiy image and a text embedding as the input, and predicts the noise. - <code>Scheduler</code> This determines the details of the diffusion process, e.g.&nbsp;how many steps to run, how much noise to remove at each step, etc.</p>
+<p>There are 5 main components of a <code>StableDiffusionPipeline</code>:</p>
+<ul>
+<li><code>VAE</code> This is a downsampler + upsampler combination which works in the beginning and the end of the pipeline. It can “compress” the image from 512x512 -&gt; 64x64 (8 times, which means the image sizes need to be divisible by 8) or “decompress” it back.</li>
+<li><code>Text Encoder</code> and <code>Tokenizer</code> This two components work together to convert text prompts into embeddings.</li>
+<li><code>UNet</code> This is the main module for diffusion, which takes a nosiy image and a text embedding as the input, and predicts the noise.</li>
+<li><code>Scheduler</code> This determines the details of the diffusion process, e.g.&nbsp;how many steps to run, how much noise to remove at each step, etc.</li>
+</ul>
 </section>
 <section id="encode-and-decode-with-vae" class="level1">
 <h1>Encode and Decode with VAE</h1>
